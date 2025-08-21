@@ -1,38 +1,30 @@
-max_itter = 100
-h = 1e-5
+# creating a function to get the first derivative
+def deriv(f, x, eps = 1e-5):
+    return (f(x+eps) - f(x)) / eps
 
-def function(x):
-    return(x**2)
+# creating a function to get the second derivative 
+def deriv2(f, x, eps = 1e-5): 
+    return (deriv(f, x+eps, eps) - deriv(f, x, eps)) / eps
 
-#Derivatives
+# final function
+def optimize(x0, f, tol = 1e-4): 
+    """Run Newton's method to minimize a function. 
+    Parameters 
+    ----------
+    x0: starting value 
+    f: function to minimize 
+    tol: 
+    """
+    x_new = x0 - deriv(f, x0) / deriv2(f, x0) 
+    x = x0 
+    while abs(x_new - x) > tol: 
+        x = x_new 
+        x_new = x - deriv(f, x) / deriv2(f, x)
+    return {"x": x_new, 
+            'value': f(x_new)}
 
-def first_derivative(f, x, h = 1e-5):  #Calculate first derivative
-    '''Calculate first derivative using finite differences'''
-    
-    df = (f(x+h) - f(x))/h
-    return df
 
-def second_derivative(f, x, h = 1e-5):  #Calculate second derivative
-    '''Calculate  second derivative using finite differences'''
-    
-    df1 = first_derivative(f, x + h, h)
-    df0 = first_derivative(f, x, h)
-    ddf = (df1 - df0)/h
-    return ddf
 
-#Newton's Method
-
-def newtons_method(x_0, f, tol = 1e-7, max_iter = 100):
-    '''Newton's method Function'''
-
-    x = x_0
-    df = first_derivative(f, x, h = 1e-5 )
-    ddf = second_derivative(f, x, h = 1e-5)
-    
-    for i in range(max_itter):
-        if (x - h) > 0.1:
-            x_1 = x - (df/ddf)
-        return x_1
 
 
 
