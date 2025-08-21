@@ -35,10 +35,10 @@ def f(params):
     return (x - 1)**2 + (y - 2)**2
     
 
-def multivariate_newton(f, x0, tol, max_itter):
+def multivariate_newton(f, x0, tol = 1e-4, max_itter = 100):
 
     '''
-    f: scalar vlaued fucniton
+    f: scalar valued function
     x0: numpy array initila guess
     tol: convergence tolerance
     itter: number itterations
