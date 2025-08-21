@@ -45,7 +45,7 @@ def multivariate_newton(f, x0, tol = 1e-4, max_itter = 100):
 
     algorithm:  x_new = x - H'g 
     '''
-    
+    max_itter = 100
     grad = nd.Gradient(f)
     hess = nd.Hessian(f)
 
